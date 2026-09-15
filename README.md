@@ -165,27 +165,22 @@ Request Access: In the ticket, request a "Club API Token" for the purpose of int
 --------------------------------------------------------------------------------------------------
 OBS Studio has a built-in integration with YouTube, making it incredibly easy to schedule and launch your live stream without ever needing to open a web browser.
 
-**Phase 1**: Connect the Club's YouTube Account
-You only need to do this once when setting up the PC for the first time.
-    1. Open OBS Studio.
-    2. In the bottom-right corner under the Controls panel, click Settings.
-    3. Navigate to the Stream tab on the left menu.
-    4. Set the Service drop-down to YouTube - RTMPS.
-    5. Click the Connect Account (recommended) button.
-    6. Your web browser will open. Log in using the cricket club's official YouTube account credentials and grant OBS Studio the required permissions.
-    7. Return to OBS Studio and click Apply, then OK to close the settings window.
+**Phase 1**: Connect the Club's YouTube Account - You only need to do this once when setting up the PC for the first time.
+1. Open OBS Studio.
+2. In the bottom-right corner under the Controls panel, click Settings.
+3. Navigate to the Stream tab on the left menu.
+4. Set the Service drop-down to YouTube - RTMPS.
+5. Click the Connect Account (recommended) button.
+6. Your web browser will open. Log in using the cricket club's official YouTube account credentials and grant OBS Studio the required permissions.
+7. Return to OBS Studio and click Apply, then OK to close the settings window.
 
-**Phase 2**: Starting the Match Day Stream
-Follow these steps before the first ball of every match.
-    1. In the main OBS Studio window, locate the Controls panel in the bottom-right corner.
-    2. Click the Manage Broadcast button (this button replaces the standard "Start Streaming" button once your account is connected).
-    3. A new window will pop up. Fill in the following details:
-        ◦ Title: Enter the match name (e.g., Timperley CC 1st XI vs Oxton CC 1st XI).
-        ◦ Privacy: Set this to Public so your subscribers can see it.
-        ◦ Category: Select Sports.
-        ◦ Is this video made for kids?: You must select "No, it's not made for kids". (This is a legal YouTube requirement; selecting "Yes" will disable the live chat and restrict the stream's reach).
-    4. Once your details are entered, click the Create Broadcast and Start Streaming button at the bottom of the window.
-
-Your stream is now live! The OBS status bar at the bottom of the screen will turn green and display your current bit rate and live viewer count.
-
-Configuration: Once provided, enter this token along with your Club Site ID using Option 4 in the Python script's main menu. The system will save these details securely for future use.
+**Phase 2**: Starting the Match Day Stream - Follow these steps before the first ball of every match.
+1. In the main OBS Studio window, locate the Controls panel in the bottom-right corner.
+2. Click the Manage Broadcast button (this button replaces the standard "Start Streaming" button once your account is connected).
+3. A new window will pop up. Fill in the following details:
+   ◦ Title: Enter the match name (e.g., Timperley CC 1st XI vs Oxton CC 1st XI).
+   ◦ Privacy: Set this to Public so your subscribers can see it.
+   ◦ Category: Select Sports.
+   ◦ Is this video made for kids?: You must select "No, it's not made for kids". (This is a legal YouTube requirement; selecting "Yes" will disable the live chat and restrict the stream's reach).
+4. Once your details are entered, click the Create Broadcast and Start Streaming button at the bottom of the window.
+5. DONE! Your stream is now live! The OBS status bar at the bottom of the screen will turn green and display your current bit rate and live viewer count.
