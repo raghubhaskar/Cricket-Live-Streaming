@@ -4,20 +4,18 @@ Cricket Live Streaming (Play-Cricket to OBS Studio to Youtube)
 Welcome! This project provides cricket clubs with a completely free, amatuer-grade live streaming graphics overlay (similar to premium services like FrogBox). By intercepting the Bluetooth (BLE) signal broadcasted by the official ECB Play-Cricket Scorer app, this software automatically updates an on-screen TV graphic in OBS Studio in real-time. No manual score entry is required by the broadcast team—if it is scored on the tablet, it appears on the live stream.
 
 🌟 **Features**
-    • Zero-Delay Automation: Captures live score data directly from the scorer's tablet via Bluetooth.
-    • Professional Graphics: Clean, modern lower-third overlay featuring team scores, wickets, overs, current batters, bowler figures, required run rates, and a dynamic ball-by-ball timeline.
-    • Play-Cricket API Integration: Automatically fetches today's fixtures and populates team names.
-    • Corner Logos: Easily display your club crest and sponsor logos on the stream.
-    • Terminal Interface: Simple menu-driven application to manage the match state.
+1. Zero-Delay Automation: Captures live score data directly from the scorer's tablet via Bluetooth.
+2. Professional Graphics: Clean, modern lower-third overlay featuring team scores, wickets, overs, current batters, bowler figures, required run rates, and a dynamic ball-by-ball timeline.
+3. Play-Cricket API Integration: Automatically fetches today's fixtures and populates team names.
+4. Corner Logos: Easily display your club crest and sponsor logos on the stream.
+5. Terminal Interface: Simple menu-driven application to manage the match state.
 
 
 🛠️ **Hardware Requirements**
 To run this setup at your club, you will need:
-    1. A Scoring Tablet: Any Android or iOS tablet running the official Play-Cricket Scorer App.
-    2. A Broadcasting PC: A computer to run OBS Studio and this Python software.
-        ◦ Tested on: HP Elite Slice G2.
-        ◦ Compatible with: Almost any PC running a Linux distribution (like Zorin OS, Ubuntu, or Debian) or a Raspberry Pi 3/4. The device must have a working Bluetooth adapter.
-    3. Camera Equipment: A camera (e.g., a camcorder, IP camera, or webcam) connected to your PC to capture the match footage. I am using an IP camera which would be connected to the clubs wifi, so will the PC running OBS Studio and the python code.
+1. A Scoring Tablet: Any Android or iOS tablet running the official Play-Cricket Scorer App.
+2. A Broadcasting PC: A computer to run OBS Studio and this Python software. Tested on: HP Elite Slice G2. Compatible with: Almost any PC running a Linux distribution (like Zorin OS, Ubuntu, or Debian) or a Raspberry Pi 3/4. The device must have a working Bluetooth adapter.
+3. Camera Equipment: A camera (e.g., a camcorder, IP camera, or webcam) connected to your PC to capture the match footage. I am using an IP camera which would be connected to the clubs wifi, so will the PC running OBS Studio and the python code.
 
 
 💻 **Software & System Setup**
