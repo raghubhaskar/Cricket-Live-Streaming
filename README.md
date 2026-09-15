@@ -59,6 +59,8 @@ Step 3: Connect the Scorer
     5. Select BT-Scoreboard from the device list.
     6. The app will say "Connected". As the scorer logs deliveries, the OBS graphics will update instantly!
 
+🤝 Thank you very much to the team of https://buildyourownscoreboard.wordpress.com/ for the inspiration and the BLE scripts to help better understand what the play-cricket app is really doing.
+
 ⚠️ Important Note for Scorers: Do not pair the PC to the tablet using the tablet's main Android/iOS Bluetooth settings menu. The Play-Cricket app handles the Bluetooth connection entirely internally.
 
 🤝 Contributing & Support
