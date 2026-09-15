@@ -3,14 +3,15 @@ Cricket Live Streaming (Play-Cricket to OBS Studio to Youtube)
 
 Welcome! This project provides cricket clubs with a completely free, amatuer-grade live streaming graphics overlay (similar to premium services like FrogBox). By intercepting the Bluetooth (BLE) signal broadcasted by the official ECB Play-Cricket Scorer app, this software automatically updates an on-screen TV graphic in OBS Studio in real-time. No manual score entry is required by the broadcast team—if it is scored on the tablet, it appears on the live stream.
 
-🌟 Features
+🌟 **Features**
     • Zero-Delay Automation: Captures live score data directly from the scorer's tablet via Bluetooth.
     • Professional Graphics: Clean, modern lower-third overlay featuring team scores, wickets, overs, current batters, bowler figures, required run rates, and a dynamic ball-by-ball timeline.
     • Play-Cricket API Integration: Automatically fetches today's fixtures and populates team names.
     • Corner Logos: Easily display your club crest and sponsor logos on the stream.
     • Terminal Interface: Simple menu-driven application to manage the match state.
 
-🛠️ Hardware Requirements
+
+🛠️ **Hardware Requirements**
 To run this setup at your club, you will need:
     1. A Scoring Tablet: Any Android or iOS tablet running the official Play-Cricket Scorer App.
     2. A Broadcasting PC: A computer to run OBS Studio and this Python software.
@@ -18,7 +19,8 @@ To run this setup at your club, you will need:
         ◦ Compatible with: Almost any PC running a Linux distribution (like Zorin OS, Ubuntu, or Debian) or a Raspberry Pi 3/4. The device must have a working Bluetooth adapter.
     3. Camera Equipment: A camera (e.g., a camcorder, IP camera, or webcam) connected to your PC to capture the match footage. I am using an IP camera which would be connected to the clubs wifi, so will the PC running OBS Studio and the python code.
 
-💻 Software & System Setup
+
+💻 **Software & System Setup**
 1. Operating System Configuration (Linux)
 This project requires Linux to utilize the BlueZ Bluetooth stack to emulate a generic scoreboard.
     • Ensure your Bluetooth radio is active.
@@ -40,7 +42,8 @@ This project requires Linux to utilize the BlueZ Bluetooth stack to emulate a ge
     5. Check Refresh browser when scene becomes active and click OK.
     6. Repeat steps 2-5 to add logos_overlay.html as a second Browser Source, ensuring it sits at the top of your Sources list. 
 
-🏏 Match Day Operation
+
+🏏 **Match Day Operation**
 Operating the system on match day is designed to be simple for club volunteers.
 Step 1: Start the Server - Execute the shell script from your terminal to unblock Bluetooth and launch the menu: 
   Bash ./stream_record.sh
