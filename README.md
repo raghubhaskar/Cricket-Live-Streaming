@@ -5,13 +5,9 @@ Welcome! This project provides cricket clubs with a completely free, amatuer-gra
 
 🌟 **Features**
     • Zero-Delay Automation: Captures live score data directly from the scorer's tablet via Bluetooth.
-    
     • Professional Graphics: Clean, modern lower-third overlay featuring team scores, wickets, overs, current batters, bowler figures, required run rates, and a dynamic ball-by-ball timeline.
-    
     • Play-Cricket API Integration: Automatically fetches today's fixtures and populates team names.
-    
     • Corner Logos: Easily display your club crest and sponsor logos on the stream.
-    
     • Terminal Interface: Simple menu-driven application to manage the match state.
 
 
