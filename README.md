@@ -15,7 +15,7 @@ To run this setup at your club, you will need:
     2. A Broadcasting PC: A computer to run OBS Studio and this Python software.
         ◦ Tested on: HP Elite Slice G2.
         ◦ Compatible with: Almost any PC running a Linux distribution (like Zorin OS, Ubuntu, or Debian) or a Raspberry Pi 3/4. The device must have a working Bluetooth adapter.
-    3. Camera Equipment: A camera (e.g., a camcorder, IP camera, or webcam) connected to your PC to capture the match footage.
+    3. Camera Equipment: A camera (e.g., a camcorder, IP camera, or webcam) connected to your PC to capture the match footage. I am using an IP camera which would be connected to the clubs wifi, so will the PC running OBS Studio and the python code.
 
 💻 Software & System Setup
 1. Operating System Configuration (Linux)
@@ -25,8 +25,7 @@ This project requires Linux to utilize the BlueZ Bluetooth stack to emulate a ge
       Bash
       sudo apt update
       sudo apt install python3-dbus python3-gi python3-tk
-2. Project Files
-Clone this repository to your broadcasting PC. The project consists of the following core files:
+2. Project Files - Clone this repository to your broadcasting PC. The project consists of the following core files:
     • pc_obs_interface.py: The main backend application that creates the BLE server and provides the user menu. 
     • overlay.html: The professional lower-third graphics engine. 
     • overlay_state.json: The local data file bridging Python and HTML. 
@@ -42,9 +41,9 @@ Clone this repository to your broadcasting PC. The project consists of the follo
 
 🏏 Match Day Operation
 Operating the system on match day is designed to be simple for club volunteers.
-Step 1: Start the Server
-  Execute the shell script from your terminal to unblock Bluetooth and launch the menu: 
+Step 1: Start the Server - Execute the shell script from your terminal to unblock Bluetooth and launch the menu: 
   Bash ./stream_record.sh
+  
 Step 2: Configure the Match
   Using the on-screen terminal menu:
     • Press 4 to enter your club's Play-Cricket Site ID and API Key (you only need to do this once).
@@ -66,3 +65,52 @@ Step 3: Connect the Scorer
 🤝 Contributing & Support
 This project was built to help grassroots cricket clubs professionalize their media output without breaking the bank. If you are a developer, feel free to fork this repository, submit pull requests, or open issues if you find bugs.
 Let's make local cricket look spectacular!
+
+
+HELP ON RUNNING THE IP CAM FEED ON OBS STUDIO
+-------------------------------------------------------------------------------------------------
+🎥 Adding an IP Camera via RTSP to OBS Studio
+Using an IP (Internet Protocol) camera is one of the most robust and cost-effective ways to broadcast cricket. Because they transmit video over standard network cables (Ethernet), you can mount the camera high up on a clubhouse roof or sight screen, far away from the broadcasting PC, without losing video quality.
+
+The standard method for pulling an IP camera feed into broadcasting software is through RTSP (Real-Time Streaming Protocol).
+
+**Phase 1: Physical Installation & Networking**
+Choose your Vantage Point: For cricket, the best angles are elevated. Mount the camera either straight down the wicket (from behind the bowler's arm) or high up square of the wicket. Ensure the camera is weatherproof (look for an IP66 or IP67 rating).
+
+Use Power over Ethernet (PoE): While you can use Wi-Fi, a wired connection is strongly recommended for live streaming. A PoE switch or injector allows you to send both power and a stable data connection to the camera over a single Cat5e or Cat6 Ethernet cable, eliminating the need for a separate power outlet on the roof.
+
+Connect to the Network: Run the Ethernet cable from the camera into your PoE switch, and connect that switch to the same local network (router) as your broadcasting PC.
+
+**Phase 2: Camera Configuration**
+To get the video feed, you need to find the camera's unique network address and format its RTSP link.
+
+Find the IP Address: Use your router's admin panel or the camera manufacturer’s discovery tool (e.g., SADP for Hikvision, ConfigTool for Dahua) to find the IP address assigned to the camera.
+
+Set a Static IP: Log into the camera’s web interface by typing its IP address into a web browser. Navigate to the network settings and change the IP configuration from DHCP to Static. This ensures the IP address never changes when the system restarts.
+
+Format the RTSP URL: Every camera brand has a specific RTSP URL structure. You will need the camera's IP address, your admin username, and your password. A typical RTSP URL looks like this:
+rtsp://username:password@192.168.1.100:554/stream1
+(Check your camera manual or an online RTSP database like iSpyConnect for your specific brand's format).
+
+**Phase 3: Capturing the Stream in OBS Studio**
+Once your camera is powered on and you have your RTSP URL, adding it to OBS Studio is straightforward.
+
+1. Open OBS Studio.
+2. In the Sources panel, click the + button and select Media Source (Do not choose Video Capture Device).
+3. Name the source (e.g., "Main Roof Camera") and click OK.
+4. In the properties window, uncheck the box that says Local File.
+
+Two new fields will appear:
+Input: Paste your complete RTSP URL here.
+Input Format: Leave this blank.
+Adjust Network Buffering: By default, OBS sets this to 2 MB. If your video stutters or drops frames, you can increase this value. If you want lower latency (less delay between real life and the stream), lower it to 1 MB.
+
+5. Click OK.
+
+After a few seconds of buffering, your IP camera feed will appear on the OBS canvas. You can now resize it, place it beneath your logos_overlay.html, and place your overlay.html scoreboard graphic on top of it.
+
+My OBS Studio looks like this (Do not mind the feed as I was testing with my home IP camera)
+<img width="1284" height="933" alt="image" src="https://github.com/user-attachments/assets/f2b2d459-e02d-4973-adde-15bcc6f5f451" />
+
+
+Recomendation: Reolink rlc-811a - cheap and can be zoomed in and panned.
