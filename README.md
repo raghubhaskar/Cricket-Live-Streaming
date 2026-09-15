@@ -111,6 +111,19 @@ After a few seconds of buffering, your IP camera feed will appear on the OBS can
 
 My OBS Studio looks like this (Do not mind the feed as I was testing with my home IP camera)
 <img width="1284" height="933" alt="image" src="https://github.com/user-attachments/assets/f2b2d459-e02d-4973-adde-15bcc6f5f451" />
-
-
 Recomendation: Reolink rlc-811a - cheap and can be zoomed in and panned.
+
+
+🔑 Acquiring a Play-Cricket API Key (Optional)
+----------------------------------------------------------------------------------------
+To utilize Option 2 in the application menu (which automatically fetches today's fixtures and populates the team names), your club will need a Play-Cricket API Key.
+
+Please note that this step is not mandatory. If you do not have an API key, you can simply use Option 3 in the menu to manually enter the Home and Away team names for your broadcast.
+
+If your club wishes to automate fixture retrieval:
+
+Raise a Support Ticket: A senior administrative member of your club (e.g., the Chairman, Secretary, or Play-Cricket Main Administrator) must raise a support ticket directly with the Play-Cricket Helpdesk.
+
+Request Access: In the ticket, request a "Club API Token" for the purpose of integrating live broadcast graphics.
+
+Configuration: Once provided, enter this token along with your Club Site ID using Option 4 in the Python script's main menu. The system will save these details securely for future use.
