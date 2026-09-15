@@ -1,4 +1,5 @@
 Cricket Live Streaming (Play-Cricket to OBS Studio to Youtube)
+----------------------------------------------------------------------------------------
 
 Welcome! This project provides cricket clubs with a completely free, amatuer-grade live streaming graphics overlay (similar to premium services like FrogBox). By intercepting the Bluetooth (BLE) signal broadcasted by the official ECB Play-Cricket Scorer app, this software automatically updates an on-screen TV graphic in OBS Studio in real-time. No manual score entry is required by the broadcast team—if it is scored on the tablet, it appears on the live stream.
 
