@@ -61,6 +61,8 @@ Step 3: Connect the Scorer
 
 <img width="1920" height="1200" alt="51" src="https://github.com/user-attachments/assets/0bff38cb-e712-4404-b800-adcc53cac4be" />
 <img width="1920" height="1200" alt="52" src="https://github.com/user-attachments/assets/083a5f47-702d-4942-a26c-c516dc46e517" />
+Sample output from play-cricket app which is displayed by the python script
+<img width="731" height="596" alt="image" src="https://github.com/user-attachments/assets/537d4f02-36aa-405b-b398-b035e253720b" />
 
 
 🤝 Thank you very much to the team of https://buildyourownscoreboard.wordpress.com/ for the inspiration and the BLE scripts to help better understand what the play-cricket app is really doing.
