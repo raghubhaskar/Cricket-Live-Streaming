@@ -184,3 +184,40 @@ OBS Studio has a built-in integration with YouTube, making it incredibly easy to
    ◦ Is this video made for kids?: You must select "No, it's not made for kids". (This is a legal YouTube requirement; selecting "Yes" will disable the live chat and restrict the stream's reach).
 4. Once your details are entered, click the Create Broadcast and Start Streaming button at the bottom of the window.
 5. DONE! Your stream is now live! The OBS status bar at the bottom of the screen will turn green and display your current bit rate and live viewer count.
+
+
+💾 Recording a Local Backup (Highly Recommended)
+-------------------------------------------------------------------------------------
+Internet connections at sports grounds can be unpredictable. If the Wi-Fi or 4G/5G drops, the live stream will buffer or disconnect. To ensure you do not lose the match footage (and to allow for uploading highlights later), you should simultaneously record a backup copy directly to your PC's hard drive.
+
+1. Configure Recording Settings
+In OBS Studio, click Settings in the bottom-right corner.
+
+Navigate to the Output tab on the left-hand menu.
+
+Look for the Recording section and check the Recording Path so you know exactly which folder the video files will be saved in (e.g., your Videos folder).
+
+Set the Recording Quality to Same as stream.
+
+Set the Recording Format to mkv.
+
+⚠️ **Crucial Tip:** Never record directly to MP4. If the broadcasting PC loses power or crashes during the match, an MP4 file will be completely corrupted and unplayable. An MKV file is crash-proof and will save perfectly up to the exact second the system went offline. (You can easily convert MKV to MP4 later within OBS by clicking File > Remux Recordings).
+
+Click Apply and OK.
+
+2. Automate the Recording
+While you can manually click Start Recording at the beginning of every match, it is easy for volunteers to forget in the rush of match day. To automate this process:
+
+Open Settings and stay on the General tab.
+
+Scroll down to the Output section.
+
+Check the box for Automatically record when streaming.
+
+Click Apply and OK.
+
+Now, every time you click "Create Broadcast and Start Streaming", OBS will automatically save a pristine, glitch-free copy of the match to your hard drive in the background.
+
+
+THANK YOU
+-------------------------------------------------------------------------
