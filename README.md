@@ -66,6 +66,62 @@ Sample output from play-cricket app which is displayed by the python script
 <img width="731" height="596" alt="image" src="https://github.com/user-attachments/assets/537d4f02-36aa-405b-b398-b035e253720b" />
 
 
+HOW IT WORKS
+----------------------------------------------------------------------------------
+```mermaid
+flowchart TB
+    %% Styling
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef cloud fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
+    classDef edge fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
+    classDef user fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+
+    subgraph "On-Ground Source"
+        Cam[Live Camera Feed]
+        Enc[Video Encoder / OBS]
+        Cam --> Enc
+    end
+
+    subgraph "Video Processing Pipeline (Cloud)"
+        Ingest[RTMP Ingest Server]
+        Transcoder[Transcoding Servicee.g., FFmpeg / AWS MediaLive]
+        Origin[Origin Storagee.g., S3 Bucket / MediaStore]
+        
+        Enc -- "RTMP/SRT Stream" --> Ingest
+        Ingest -- "Raw Video" --> Transcoder
+        Transcoder -- "HLS/DASH Chunks(Multiple Bitrates)" --> Origin
+    end
+    class Ingest,Transcoder,Origin cloud;
+
+    subgraph "Live Match Data & Backend"
+        ScoreAPI[3rd-Party Cricket APICricAPI / Roar]
+        DB[(Metadata Database)]
+        API[Backend ServerNode.js / Django]
+        
+        ScoreAPI -- "Poll Live Scores" --> API
+        API <--> DB
+    end
+    class API,DB cloud;
+
+    subgraph "Content Delivery & Edge"
+        CDN[CDNCloudflare / CloudFront]
+        WSS[WebSocket ServerReal-time Updates]
+        
+        Origin --> CDN
+        API --> WSS
+    end
+    class CDN,WSS edge;
+
+    subgraph "End Users"
+        Player[Web/Mobile AppVideo.js / HLS.js]
+        
+        CDN -- "Video Stream" --> Player
+        WSS -- "Live Scores & Overlay Data" --> Player
+    end
+    class Player user;
+```
+
+
 🤝 Thank you very much to the team of https://buildyourownscoreboard.wordpress.com/ for the inspiration and the BLE scripts to help better understand what the play-cricket app is really doing.
 
 ⚠️ Important Note for Scorers: Do not pair the PC to the tablet using the tablet's main Android/iOS Bluetooth settings menu. The Play-Cricket app handles the Bluetooth connection entirely internally.
