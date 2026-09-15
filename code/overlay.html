@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+	body {
+			background-color: transparent;
+			font-family: 'Roboto Condensed', Arial, sans-serif;
+			margin: 0; padding: 0;
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			height: 100vh;
+			padding-bottom: 30px;
+		}
+
+		.ticker-container {
+			display: flex;
+			width: 95%;
+			max-width: 1800px;
+			height: 70px;
+			box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+			text-transform: uppercase;
+			position: relative;
+		}
+
+		.panel-left, .panel-right {
+			background: #ffffff;
+			color: #000;
+			flex: 1;
+			display: flex;
+			align-items: center; 
+			padding: 15px 30px; 
+			border-bottom: 4px solid #d3d3d3;
+		}
+
+		.panel-center {
+			background: #5bb4e5; 
+			color: #000;
+			padding: 5px 40px;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+			min-width: 450px;
+			border-bottom: 4px solid #3a8cba;
+			z-index: 10;
+			margin: 0 -25px; 
+		}
+
+		.batter-row, .bowler-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			width: 100%;
+			font-size: 22px;
+			font-weight: 700;
+			line-height: 1.3;
+		}
+
+		.striker { color: #5bb4e5; font-size: 16px; margin-right: 8px; }
+		.score-val { font-size: 24px; font-weight: 900; margin-left: auto; margin-right: 15px;}
+		.balls-val { font-size: 18px; color: #777; font-weight: 400; width: 35px; text-align: right;}
+		
+		.main-score {
+			font-size: 38px;
+			font-weight: 900;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 15px;
+			letter-spacing: -0.5px;
+		}
+		
+		.overs-text {
+			font-size: 24px;
+			font-weight: 700;
+			color: #222;
+		}
+
+		.sub-stats { 
+			font-size: 15px; 
+			color: #111; 
+			margin-top: 2px; 
+			font-weight: 700;
+			letter-spacing: 0.5px;
+		}
+		
+		.timeline {
+			display: flex;
+			gap: 6px;
+			align-items: center;
+			margin-top: 4px;
+			min-height: 22px;
+		}
+
+		.dot { 
+			min-width: 22px; 
+			height: 22px; 
+			background: #fff; 
+			border-radius: 50%; 
+			border: 2px solid #555; 
+			display: flex; 
+			align-items: center; 
+			justify-content: center; 
+			font-size: 12px;
+			font-weight: 900;
+			color: #000;
+		}
+	</style>
+</head>
+<body>
+
+<div class="ticker-container">
+    <!-- LEFT PANEL: Batters -->
+    <div class="panel-left">
+        <div style="width: 100%;">
+            <div class="batter-row">
+                <span><span id="B1K" class="striker">&#9658;</span> <span id="B1N">BATTER 1</span></span>
+                <span><span class="score-val" id="B1S">0</span><span class="balls-val" id="B1B">0</span></span>
+            </div>
+            <div class="batter-row">
+                <span><span id="B2K" class="striker" style="visibility:hidden;">&#9658;</span> <span id="B2N">BATTER 2</span></span>
+                <span><span class="score-val" id="B2S">0</span><span class="balls-val" id="B2B">0</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CENTER PANEL: Team Score -->
+    <div class="panel-center">
+        <div class="main-score">
+            <span id="BTN">TEAM</span> 
+            <span><span id="BTR">0</span>/<span id="BTW">0</span></span> 
+            <span class="overs-text">(<span id="OVB">0.0</span>)</span>
+        </div>
+        <!-- Target and RRR dynamically injected here -->
+        <div class="sub-stats" id="sub-stats-container">
+            CRR 0.00
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL: Bowler & Timeline -->
+    <div class="panel-right">
+        <div style="width: 100%;">
+            <div class="bowler-row">
+                <span id="F1N">BOWLER</span>
+                <span><span class="score-val" id="F1S">0-0</span><span class="balls-val"></span></span>
+            </div>
+            <div class="timeline"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function abbreviateName(name) {
+        if (!name) return "";
+        return name.split(/[\s-]+/)
+                   .filter(word => word.length > 0)
+                   .map(word => word[0])
+                   .join('')
+                   .toUpperCase();
+    }
+
+    setInterval(() => {
+        fetch('overlay_state.json', { cache: "no-store" })
+            .then(r => r.json())
+            .then(data => {
+                
+                const fields = ['B1N', 'B1S', 'B1B', 'B2N', 'B2S', 'B2B', 'BTR', 'BTW', 'OVB', 'F1N', 'F1S'];
+                fields.forEach(f => {
+                    if(data[f] !== undefined && document.getElementById(f)) {
+                        document.getElementById(f).innerText = data[f];
+                    }
+                });
+
+                if(data['BTN'] !== undefined) {
+                    document.getElementById('BTN').innerText = abbreviateName(data['BTN']);
+                }
+
+                document.getElementById('B1K').style.visibility = (data['B1K'] === '1') ? 'visible' : 'hidden';
+                document.getElementById('B2K').style.visibility = (data['B2K'] === '1') ? 'visible' : 'hidden';
+
+                // TARGET, RRR, and CRR Logic
+                const targetVal = parseInt(data['BTT']) || 0;
+                let crr = "0.00";
+                
+                if (data['BTR'] && data['OVB']) {
+                    let runs = parseInt(data['BTR']) || 0;
+                    let oversSplit = data['OVB'].split('.');
+                    let balls = (parseInt(oversSplit[0]) || 0) * 6 + (parseInt(oversSplit[1]) || 0);
+                    if (balls > 0) {
+                        crr = ((runs / balls) * 6).toFixed(2);
+                    }
+                }
+
+                // If Target exists (2nd innings), append RRR and Target
+                if (targetVal > 0) {
+                    document.getElementById('sub-stats-container').innerHTML = `CRR \({crr} | RRR\){data['RRR']} | TARGET ${targetVal}`;
+                } else {
+                    document.getElementById('sub-stats-container').innerHTML = `CRR ${crr}`;
+                }
+
+                // Dynamic Timeline Logic
+                if (data['COV'] !== undefined) {
+                    const timeline = document.querySelector('.timeline');
+                    timeline.innerHTML = '';
+                    
+                    if (data['COV'].trim() !== "") {
+                        const balls = data['COV'].trim().split(/\s+/);
+                        balls.forEach(ball => {
+                            let dot = document.createElement('div');
+                            dot.className = 'dot';
+                            dot.innerText = ball === '.' ? '' : ball;
+                            
+                            if (ball === 'W') { dot.style.background = '#e74c3c'; dot.style.color = '#fff'; dot.style.borderColor = '#e74c3c'; }
+                            else if (ball === '4' || ball === '6') { dot.style.background = '#5bb4e5'; dot.style.color = '#fff'; dot.style.borderColor = '#5bb4e5'; }
+                            else if (ball.includes('wd') || ball.includes('nb')) { dot.style.background = '#f39c12'; dot.style.color = '#fff'; dot.style.borderColor = '#f39c12'; }
+                            else if (ball === '.') { dot.style.background = '#eee'; dot.style.borderColor = '#ccc'; }
+                            
+                            timeline.appendChild(dot);
+                        });
+                    }
+                }
+            })
+            .catch(e => console.error("Waiting for state..."));
+    }, 500);
+</script>
+
+</body>
+</html>

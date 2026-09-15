@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            /* Full transparent canvas to match OBS resolution (e.g., 1920x1080) */
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 20px; /* Distance from the top edge */
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8); /* Optional: slight white backing for contrast */
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .top-left {
+            left: 20px; /* Distance from the left edge */
+        }
+
+        .top-right {
+            right: 20px; /* Distance from the right edge */
+        }
+
+        .logo-img {
+            /* Adjust the max-height depending on how large you want the logos on stream */
+            max-height: 120px; 
+            width: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Timperley CC Logo -->
+    <div class="logo-container top-left">
+        <img src="image_6f7642.png" alt="Timperley CC Logo" class="logo-img">
+    </div>
+
+</body>
+</html>
