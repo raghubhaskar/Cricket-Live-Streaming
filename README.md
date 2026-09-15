@@ -59,6 +59,10 @@ Step 3: Connect the Scorer
     5. Select BT-Scoreboard from the device list.
     6. The app will say "Connected". As the scorer logs deliveries, the OBS graphics will update instantly!
 
+<img width="1920" height="1200" alt="51" src="https://github.com/user-attachments/assets/0bff38cb-e712-4404-b800-adcc53cac4be" />
+<img width="1920" height="1200" alt="52" src="https://github.com/user-attachments/assets/083a5f47-702d-4942-a26c-c516dc46e517" />
+
+
 🤝 Thank you very much to the team of https://buildyourownscoreboard.wordpress.com/ for the inspiration and the BLE scripts to help better understand what the play-cricket app is really doing.
 
 ⚠️ Important Note for Scorers: Do not pair the PC to the tablet using the tablet's main Android/iOS Bluetooth settings menu. The Play-Cricket app handles the Bluetooth connection entirely internally.
@@ -66,6 +70,32 @@ Step 3: Connect the Scorer
 🤝 Contributing & Support
 This project was built to help grassroots cricket clubs professionalize their media output without breaking the bank. If you are a developer, feel free to fork this repository, submit pull requests, or open issues if you find bugs.
 Let's make local cricket look spectacular!
+
+
+HOW IT WORKS BEHIND THE SCENES
+-------------------------------------------------------------------------------------------------
+The live graphics system you have built operates on a highly efficient, one-way data pipeline. It acts as a bridge between the physical Bluetooth radio on your PC and the visual rendering engine inside OBS Studio. Here is the step-by-step breakdown of exactly how that data flows from the scorer's fingertips to the live stream.
+
+1. The BLE Transmission (Tablet → Python) - When the scorer records a delivery on the Play-Cricket app, the tablet immediately broadcasts that new information over Bluetooth Low Energy (BLE).
+    • The pc_obs_interface.py script acts as a BLE GATT server, keeping a specific "receive" slot open (defined by the UART_RX_CHARACTERISTIC_UUID). 
+    • The app sends data to this slot in the form of raw bytes, formatted as a 3-letter code followed by the value (for example, BTR150 to indicate the Batting Team Runs are 150). 
+
+2. Data Processing (Python → JSON) = As soon as those bytes hit your PC's Bluetooth adapter, the Python script intercepts them.
+    • The WriteValue function in the script decodes the raw bytes into standard text. 
+    • It splits the string, separating the 3-letter identifier (BTR) from the actual value (150). 
+    • To safely store this, the script opens the overlay_state.json file. 
+    • It updates the specific dictionary key (e.g., changing "BTR": "0" to "BTR": "150") and saves the file. To prevent OBS from trying to read the file at the exact millisecond Python is writing to it, the script safely writes to a temporary file (state_temp.json) before instantly replacing the main file. 
+
+3. The Web Polling (JSON → HTML) - The HTML file does not passively wait to be told there is new data; it actively checks for it.
+    • The overlay.html file contains a JavaScript setInterval loop that runs twice every second (every 500 milliseconds). 
+    • During each loop, it executes a fetch('overlay_state.json') command, explicitly telling the browser engine not to cache the result (cache: "no-store") so it always grabs the freshest data. 
+    • The script reads the JSON dictionary and maps the keys directly to the HTML elements on the screen, updating the text values instantly. 
+
+4. The Broadcast (HTML → OBS) - OBS Studio has a built-in Chromium browser engine (the same technology that powers Google Chrome).
+    • When you add overlay.html as a Browser Source, OBS is simply running a transparent, full-screen webpage over your video feed. 
+    • As the JavaScript updates the HTML text on that page, the OBS Chromium engine instantly re-renders those pixels, showing the new score to your viewers.
+By keeping the Bluetooth receiving logic (Python) entirely separate from the graphics rendering logic (HTML/OBS) and using a simple text file (JSON) as the middleman, the system remains incredibly lightweight and crash-resistant.
+
 
 
 HELP ON RUNNING THE IP CAM FEED ON OBS STUDIO
