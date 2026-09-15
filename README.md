@@ -221,3 +221,4 @@ Now, every time you click "Create Broadcast and Start Streaming", OBS will autom
 
 THANK YOU
 -------------------------------------------------------------------------
+https://discord.gg/am2aDQazu
